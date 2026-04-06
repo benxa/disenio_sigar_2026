@@ -13,7 +13,7 @@
   background: #0f192a;
 }
 .nk-header.is-theme:not([class*=bg-]) {
-  background: #064936;
+  background: #2a5536;
 }
 
 .is-dark .nk-menu-link {
@@ -48,26 +48,26 @@
 }
 
 .is-theme .nk-menu-link {
-  color: #a3dfcf;
+  color: #c7a038;
 }
 .is-theme .nk-menu-icon {
-  color: #c2eadf;
+  color: #d0af58;
 }
 .is-theme .nk-menu-badge {
   color: #63f1ca;
-  background: #0a7859;
+  background: #3a774b;
 }
 .is-theme .nk-news-icon .icon {
   color: #1cebb3;
 }
 .is-theme .nk-news-text .icon, .is-theme .nk-quick-nav-icon, .is-theme .overline-title {
-  color: #abe2d3;
+  color: #c9a440;
 }
 .is-theme .nk-news-text p span, .is-theme .nk-menu-heading .overline-title {
-  color: rgba(171, 226, 211, 0.8);
+  color: rgba(201, 164, 64, 0.8);
 }
 .is-theme .user-name, .is-theme .nk-news-text p {
-  color: #bee9dd;
+  color: #cfad54;
 }
 
 .card-tools-nav li a:before,
@@ -86,11 +86,11 @@
 }
 
 .card-bordered.is-dark {
-  border-color: #07523d;
+  border-color: #2d5c3a;
 }
 
 .card.is-dark {
-  background: #07523d;
+  background: #2d5c3a;
 }
 
 .user-avatar, [class^=user-avatar]:not([class*=-group]) {
@@ -263,7 +263,7 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
 }
 
 .nk-error-head {
-  background: -webkit-linear-gradient(#0fac81, #0b8160);
+  background: -webkit-linear-gradient(#0fac81, #3e7e50);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -283,11 +283,11 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
 }
 
 .is-dark .nk-iv-wg2-title .title {
-  color: #abe2d3;
+  color: #c9a440;
 }
 
 .is-theme .nk-quick-nav-icon:before {
-  background-color: #03231a;
+  background-color: #1c3a24;
 }
 
 .btn-primary {
@@ -397,10 +397,10 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
     background: #0fac81;
   }
   .is-theme .nk-menu-main > li > .nk-menu-link {
-    color: #abe2d3;
+    color: #c9a440;
   }
   .is-theme .nk-menu-main > li > .nk-menu-link.nk-menu-toggle:after {
-    color: rgba(171, 226, 211, 0.7);
+    color: rgba(201, 164, 64, 0.7);
   }
 }
 .datepicker table tr td.today, .datepicker table tr td.today:hover, .datepicker table tr td.today.disabled, .datepicker table tr td.today.disabled:hover {
@@ -418,7 +418,7 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
 .datepicker table tr td.today.disabled.disabled, .datepicker table tr td.today.disabled:hover.disabled,
 .datepicker table tr td.today[disabled], .datepicker table tr td.today:hover[disabled],
 .datepicker table tr td.today.disabled[disabled], .datepicker table tr td.today.disabled:hover[disabled] {
-  background-color: #72ceb5;
+  background-color: #93762a;
 }
 
 .datepicker table tr td.active:active, .datepicker table tr td.active:hover:active,
@@ -444,12 +444,12 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
 }
 
 .is-theme .nk-sidebar-footer, .nk-apps-sidebar.is-theme, .is-theme .nk-sidebar-profile-fixed {
-  background: #064936;
-  border-color: #0a7859;
+  background: #2a5536;
+  border-color: #3a774b;
 }
 
 .is-theme .nk-menu-footer .nk-menu-link, .is-theme .sub-text, .is-theme .lead-text span {
-  color: #abe2d3;
+  color: #c9a440;
 }
 
 .nav-switch-s2 .nav-link:hover, .nav-switch-s2 .nav-link:focus {
