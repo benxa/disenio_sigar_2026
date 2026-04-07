@@ -1,5 +1,5 @@
 /*!
- * Theme: Green
+ * Theme: Poder Judicial
  * Package: DashLite v3.2.3
  * Updated: 09.27.2023
  * Author: Softnio
@@ -139,6 +139,10 @@ $skin_menu_active_color:        $skin_accent;
 }
 .card.is-dark {
     background: $skin_accent_dark;
+}
+
+.card-title .subtitle{
+    color:$skin_base_light;
 }
 .user-avatar, [class^="user-avatar"]:not([class*="-group"]) {
     background: lighten($skin_accent, 10%);
