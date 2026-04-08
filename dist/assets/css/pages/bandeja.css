@@ -1,0 +1,79 @@
+.nk-content {
+  padding: 0;
+}
+.nk-content-body {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+.nk-ibx-aside {
+  width: 260;
+  flex-shrink: 0;
+  border-right: 1px solid #2d5c3a;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.nk-ibx-head {
+  padding: 14px 18px;
+  border-bottom: 1px solid #2d5c3a;
+  display: flex;
+  align-items: end;
+  justify-content: end;
+  flex-shrink: 0;
+}
+.nk-ibx-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+.nk-ibx-nav::-webkit-scrollbar {
+  width: 3px;
+}
+.nk-ibx-nav::-webkit-scrollbar-thumb {
+  background: #2d5c3a;
+}
+.nk-ibx-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 4px;
+}
+.nk-ibx-menu li {
+  position: relative;
+}
+.nk-ibx-menu li.active .nk-ibx-menu-item {
+  background: #f5f6fa;
+  color: #d4ead9;
+  font-weight: 600;
+  border-left-color: #2d5c3a;
+  border-left-color: #2d5c3a;
+}
+.nk-ibx-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 10px;
+  font-size: 0.82rem;
+  color: #2d5c3a;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  border-left: 3px solid transparent;
+}
+.nk-ibx-menu-item:hover {
+  background: #f5f6fa;
+}
+.nk-ibx-menu-item .badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+}
+.nk-ibx-menu-text {
+  flex: 1;
+}
+
+.badge-pj-primary {
+  background: #8b2531;
+  color: #ffffff;
+}

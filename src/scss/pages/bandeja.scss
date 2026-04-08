@@ -1,0 +1,360 @@
+// .nk-content {
+//                     padding:0;
+//                 }
+//                 .nk-content-body{
+//                     display:flex;
+//                     height:100%;
+//                     overflow:hidden;
+//                 }
+//                 .nk-ibx-aside{
+//                     width:260;
+//                     flex-shrink:0;
+//                     border-right: 1px solid #2d5c3a;
+//                     display:flex;
+//                     flex-direction:column;
+//                     overflow:hidden;
+//                 }
+//                 .nk-ibx-head{
+//                     padding:14px 18px;
+//                     border-bottom: 1px solid #2d5c3a;
+//                     display:flex;
+//                     align-items:end;
+//                     justify-content:end;
+//                     flex-shrink:0;
+//                 }
+
+//                 .nk-ibx-nav{
+//                     flex:1;
+//                     overflow-y: auto;
+//                     padding:8px 0
+//                 }
+//                 .nk-ibx-nav::-webkit-scrollbar{ width:3px};
+//                 .nk-ibx-nav::-webkit-scrollbar-thumb{background:#2d5c3a}
+
+//                 .nk-ibx-menu{
+//                     list-style:none;
+//                     padding:0;
+//                     margin:0 0 4px;
+//                 }
+//                 .nk-ibx-menu li{
+//                     position:relative;
+//                 }
+//                 .nk-ibx-menu-item{
+//                     display:flex;
+//                     align-items:center;
+//                     gap:10px;
+//                     padding:5px 10px;
+//                     font-size:0.82rem;
+//                     color:#2d5c3a;
+//                     text-decoration:none;
+//                     cursor:pointer;
+//                     transition:background 0.12s, color 0.12s;
+//                     border-left:3px solid transparent;
+//                 }
+//                 .nk-ibx-menu-item:hover{
+//                     background:#f5f2eb;
+//                 }
+//                 .nk-ibx-menu li.active .nk-ibx-menu-item{
+//                     background:#f5f2eb;
+//                     color:#cfeee6;
+//                     font-weight:600;
+//                     border-left-color:#2d5c3a;
+//                     border-left-color:#2d5c3a;
+//                 }
+            
+//                 .nk-ibx-menu-text{
+//                     flex:1;
+//                 }
+//                 .nk-ibx-menu-item .badge{
+//                     font-size:0.6rem;
+//                     font-weight:700;
+//                     padding:2px 7px;
+//                     border-radius:10px;
+//                 }
+//                 .badge-pj-primary{
+//                     background:#8b2531;
+//                     color:#fff
+//                 }
+//                 .badge-pj-dorado{
+//                     background:#c9a440;
+//                     color:#fff
+//                 }
+//                 .badge-pj-verde{
+//                     background:#2d5c3a;
+//                     color:#fff
+//                 }
+//                 .badge-pj-light{
+//                     background:#5a7fb8;
+//                     color:#fff
+//                 }
+
+//                  /* Nav section heads */
+//                 .nk-ibx-nav-head{
+//                     display:flex;
+//                     align-items:center;
+//                     justify-content:space-between;
+//                     padding:12px 18px 4px;
+//                 }
+//                 .nk-ibx-nav-head .title {
+//                     font-size: 0.7rem;
+//                     letter-spacing:0.13em;
+//                     text-transform:uppercase;
+//                     color:#526484;
+//                     font-weight:700;
+//                     margin:0;
+//                 }
+
+//                 /* ════════════════════════════════════════
+//                     NK-IBX-BODY (lista de oficios)
+//                 ════════════════════════════════════════ */
+
+//                 .nk-ibx-body{
+//                     flex:1;
+//                     display:flex;
+//                     flex-direction:column;
+//                     overflow:hidden;
+//                     background:#f5f2eb;
+//                     position:relative;
+//                 }
+//                  /* Toolbar de la lista */
+//                 .nk-ibx-head.list-head {
+//                     padding:10px 16px;
+//                     flex-shrink:0;
+//                     gap:10px;
+//                 }
+//                 .nk-ibx-head-actions{
+//                     display:flex;
+//                     align-items:center;
+//                     gap:10px;
+//                 }
+//                 .nk-ibx-head-check{
+//                     margin:4px;
+//                 }
+//                 .nk-ibx-head-tools{
+//                     display:flex;
+//                     list-style:none;
+//                     padding:0;
+//                     margin:0;
+//                     gap:2px;
+//                 }
+//                 .btn-trigger{
+//                     background:none;
+//                     border:none;
+//                     cursor:pointer;
+//                     color:#1e3d28;
+//                     padding:5px 7px;
+//                     font-size:0.9rem;
+//                     border-radius:4px;
+//                     transition:background 0.12s, color 0.12s;
+//                     text-decoration:none;
+//                     display:flex;
+//                     align-items:center;
+//                     justify-content:center;
+//                 }
+
+//                 /* Search wrap */
+//                 .search-wrap-ibx{
+//                     padding:8px 16px;
+//                     border-bottom:1px solid #2d5c3a;
+//                     background:#f5f2eb;
+//                     flex-shrink:0;
+//                 }
+//                 .search-ibx-inner{position:relative}
+//                 .search-ibx-inner .fa-search{
+//                     position:absolute;
+//                     left: 9px;
+//                     top:50%;
+//                     transform:translateY(-50%);
+//                     color:#2d5c3a;
+//                     font-size:0.8rem;
+//                 }
+//                 .search-ibx-inner input{
+//                     width:100%;
+//                     border:1px solid #2d5c3a;
+//                     background:#f5f2eb;
+//                     padding:7px 12px 7px 30px;
+//                     font-size:0.82rem;
+//                     outline:none;
+//                     color:#2d5c3a;
+//                     transition: border-color 0.15s, box-shadow 0.15s;
+//                 }
+//                 .search-ibx-inner input:focus{
+//                     border-color: #c9a440;
+//                     box-shadow: 0 0 0 2px rgba(61,122,80,0.12);
+//                 }
+//                 /* Tabs */
+//                 .ibx-tabs{
+//                     display:flex;
+//                     border-bottom:1px solid #2d5c3a;
+//                     flex-shrink:0;
+//                     background:#fff;
+//                 }
+//                 .ibx-tab{
+//                     flex:1;
+//                     text-align:center;
+//                     padding:8px 4px;
+//                     font-size:0.7rem;
+//                     font-weight:700;
+//                     letter-spacing:0.06rem;
+//                     color:#2d5c3a;
+//                     cursor:pointer;
+//                     border-bottom:2px solid transparent;
+//                 }
+//                 .ibx-tab:hover{
+//                     background:#f5f2eb;
+//                 }
+//                 .ibx-tab.active{
+//                     background:#f5f2eb;
+//                     border-bottom-color:#2d5c3a;
+//                 }
+
+//                 /* ════════════════════════════════════════
+//            NK-IBX-LIST — Fila de oficio (DashLite)
+//         ════════════════════════════════════════ */
+//             .nk-ibx-list{
+//                 flex:1;
+//                 overflow:auto;
+//             }
+//             .nk-ibx-list::-webkit-scrollbar { width: 4px; }
+//             .nk-ibx-list::-webkit-scrollbar-thumb { background: #2d5c3a; }
+
+//             .nk-ibx-item{
+//                 display:flex;
+//                 align-items:center;
+//                 padding: 0 16px;
+//                 height:56px;
+//                 border-bottom:1px solid #2d5c3a;
+//                 cursor:pointer;
+//                 position:relative;
+//                 transition:background 0.12s;
+//             }
+//             .nk-ibx-item:hover{
+//                 background:#f5f2eb;
+//             }
+//             .nk-ibx-item.active{
+//                 background:#f5f2eb;
+//                 border-left:3px solid #2d5c3a;
+//             }
+//             .nk-ibx-item.is-unread{
+//                 background:#fff;
+//             }
+//             .nk-ibx-item.is-unread::before{
+//                 content:'';
+//                 position:absolute;
+//                 left:4px; top:50%; transform:translateY(-50%);
+//                 width:6px;
+//                 height:6px;
+//                 background: #8b2531; border-radius: 50%;
+//             }
+//             /* Elementos de cada fila */
+//             .nk-ibx-item-elem{flex-shrink:0;}
+//             .nk-ibx-item-check{ width:24px;}
+//             .nk-ibx-item-check input { width:13px; height:13px;cursor:pointer;}
+//             .nk-ibx-item-star{ width:24px;}
+//             .nk-ibx-item-star a { font-size:0.85rem; text-decoration:none; transition:color 0.12s;}
+//             .nk-ibx-item-star a:hover,
+//             .nk-ibx-item-star a.active{
+//                 color:#c9a440
+//             }
+
+//             .nk-ibx-item-user{ width:160px; padding-right:8px;}
+//             .user-card{ display:flex; align-items:center; gap:8px}
+//             .user-avatar-ibx{
+//                 width:30px; height:30px; border-radius:50%;
+//                 display:flex; align-items:center; justify-content:center;
+//                 font-size:0.65rem;font-weight:700; color:#fff;
+//                 flex-shrink:0;
+//             }
+//             .av-verde  { background:#1e3d28; }
+//             .av-rojo   { background:#8b2531 }
+//             /*.av-dorado { background: var(--pj-dorado); color: var(--pj-texto); }
+//             .av-gris   { background: var(--pj-gris); }
+//             .av-900    { background: var(--pj-verde-900); }*/
+
+@import "../skins/variable_poder";
+.nk{
+    &-content{
+        padding:0;
+        &-body{
+            display:flex;
+            height:100%;
+            overflow:hidden;
+        }
+    }
+    &-ibx{
+        &-aside{
+            width:260;
+            flex-shrink:0;
+            border-right: 1px solid $accent-color;
+            display:flex;
+            flex-direction:column;
+            overflow:hidden;
+        }
+        &-head{
+            padding:14px 18px;
+            border-bottom: 1px solid $accent-color;
+            display:flex;
+            align-items:end;
+            justify-content:end;
+            flex-shrink:0;
+        }
+        &-nav{
+            flex:1;
+            overflow-y: auto;
+            padding:8px 0;
+            &::-webkit-scrollbar{width:3px}
+            &::-webkit-scrollbar-thumb{background:$accent-color}
+        }
+        &-menu{
+            list-style:none;
+            padding:0;
+            margin:0 0 4px;
+            & li{
+                position:relative;
+                &.active{
+                    .nk-ibx-menu-item{
+                        background:$lighter;
+                        color:$accent-300;
+                        font-weight:600;
+                        border-left-color:$accent-color;
+                        border-left-color:$accent-color;
+                    }
+                }
+            }
+            &-item{
+                display:flex;
+                align-items:center;
+                gap:10px;
+                padding:5px 10px;
+                font-size:0.82rem;
+                color:$accent-color;
+                text-decoration:none;
+                cursor:pointer;
+                transition:background 0.12s, color 0.12s;
+                border-left:3px solid transparent;
+                &:hover{
+                    background:$lighter;
+                }
+                & .badge{
+                    font-size:0.6rem;
+                    font-weight:700;
+                    padding:2px 7px;
+                    border-radius:10px;
+                }
+            }
+            &-text{
+                flex:1;
+            }
+        }
+
+    }
+}
+
+.badge-pj{
+    &-primary{
+        background:$rojo-gubernamental ;
+        color:$white;
+    }
+}
+
+
