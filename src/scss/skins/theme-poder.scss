@@ -544,3 +544,73 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
 .custom-control.color-control .custom-control-label:before{
     border-color: $skin_accent !important;
 }
+
+
+
+.btn{
+    &-pj {
+        display: inline-flex; align-items: center; gap: 6px;
+        border: none; cursor: pointer;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.77rem; font-weight: 600;
+        padding: 7px 14px; border-radius: 0;
+        transition: background 0.15s; text-decoration: none;
+        &-primary {
+            background: $pj-verde; color: #fff;
+            border-bottom: 2px solid $pj-dorado;
+            &:hover { background: $pj-verde-mid; color: $white; }
+        }
+        &-outline {
+            background: $pj-blanco; color: $pj-gris;
+            border: 1px solid $pj-borde;
+            &:hover { background: $pj-crema; color: $pj-verde; }
+        }
+        &-danger {
+            background: transparent; color: $pj-rojo;
+            border: 1px solid rgba(139,37,49,0.3);
+            &:hover { background: $pj-rojo-lite; }
+        }
+    }
+}
+
+.av{
+    &-verde{
+        background:$pj-verde;
+    }
+    &-rojo{
+        background:$pj-rojo;
+    }
+    &-dorado{
+        background:$pj-dorado;
+        color:$pj-texto;
+    }
+    &-gris{
+        background:$pj-gris;
+    }
+    &-900{
+        background:$pj-verde-900;
+    }
+}
+
+
+.nk{
+    &-footer{
+        background:$accent-color;
+        padding:10px 20px;
+        flex-shrink:0;
+        &-wrap{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-wrap:wrap;
+            gap:8px;
+        }
+        &-copyright{
+            font-size: 0.68rem; color: rgba(255,255,255,0.5);
+            & a{
+                color: $amarillo-gubernamental; text-decoration: none;
+            }
+        }
+    }
+
+}

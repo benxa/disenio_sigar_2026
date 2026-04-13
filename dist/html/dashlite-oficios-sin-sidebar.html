@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Bandeja de Oficios | PJQROO</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ══════════════════════════════════
+           VARIABLES PJQROO
+        ══════════════════════════════════ */
+        :root {
+            --pj-verde:       #2d5c3a;
+            --pj-verde-mid:   #3d7a50;
+            --pj-verde-lite:  #eaf2ec;
+            --pj-verde-900:   #1a3a24;
+            --pj-rojo:        #8b2531;
+            --pj-rojo-lite:   #fdf0f1;
+            --pj-dorado:      #c9a440;
+            --pj-dorado-lite: #e2c06a;
+            --pj-crema:       #f4f0e8;
+            --pj-crema-lite:  #f9f6f0;
+            --pj-borde:       #ddd5c0;
+            --pj-texto:       #2c2820;
+            --pj-gris:        #5c5448;
+            --pj-gris-lite:   #8a8278;
+            --pj-blanco:      #fffcf6;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html, body {
+            height: 100%;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--pj-crema);
+            color: var(--pj-texto);
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* ══════════════════════════════════
+           LAYOUT RAÍZ
+        ══════════════════════════════════ */
+        .nk-app-root { height: 100%; display: flex; flex-direction: column; }
+        .nk-wrap     { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+        /* ══════════════════════════════════
+           GOV TOPBAR
+        ══════════════════════════════════ */
+        .gov-topbar {
+            background: var(--pj-verde-900);
+            border-bottom: 2px solid var(--pj-dorado);
+            padding: 4px 20px;
+            font-size: 0.67rem;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            z-index: 1060;
+        }
+        .gov-topbar .gov-name { color: rgba(255,255,255,0.7); font-weight: 500; }
+        .gov-topbar .gov-links { display: flex; }
+        .gov-topbar .gov-links a {
+            color: var(--pj-dorado-lite); text-decoration: none;
+            font-weight: 600; padding: 0 10px;
+            border-left: 1px solid rgba(255,255,255,0.12); font-size: 0.65rem;
+        }
+        .gov-topbar .gov-links a:first-child { border-left: none; }
+        .gov-topbar .gov-links a:hover { text-decoration: underline; }
+
+        /* Franja tricolor */
+        .franja-tricolor {
+            height: 4px;
+            background: linear-gradient(90deg,
+                var(--pj-verde) 33.3%, var(--pj-dorado) 33.3% 66.6%, var(--pj-rojo) 66.6%);
+            flex-shrink: 0;
+        }
+
+        /* ══════════════════════════════════
+           NK-HEADER
+        ══════════════════════════════════ */
+        .nk-header {
+            background: var(--pj-blanco);
+            border-bottom: 1px solid var(--pj-borde);
+            box-shadow: 0 2px 8px rgba(45,92,58,0.07);
+            padding: 0 20px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            z-index: 1050;
+        }
+        .nk-header-wrap { display: flex; align-items: center; width: 100%; gap: 12px; }
+
+        /* Brand */
+        .nk-header-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+        .nk-header-brand img { height: 38px; width: auto; }
+        .brand-vr { width: 1px; height: 34px; background: linear-gradient(to bottom, transparent, var(--pj-borde), transparent); }
+        .brand-title { font-family: 'Crimson Pro', serif; font-size: 1rem; font-weight: 700; color: var(--pj-verde); line-height: 1.1; }
+        .brand-sub   { font-size: 0.6rem; color: var(--pj-rojo); font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; }
+
+        /* Nav header */
+        .nk-header-nav { margin-left: 8px; }
+        .header-nav-list { display: flex; list-style: none; margin: 0; padding: 0; gap: 2px; }
+        .header-nav-list .nav-item { position: relative; }
+        .header-nav-list .nav-link-pj {
+            display: flex; align-items: center; gap: 4px;
+            padding: 6px 12px; font-size: 0.8rem; font-weight: 600;
+            color: var(--pj-gris); text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: color 0.15s, border-color 0.15s; white-space: nowrap;
+        }
+        .header-nav-list .nav-link-pj:hover,
+        .header-nav-list .nav-item.active .nav-link-pj { color: var(--pj-verde); border-bottom-color: var(--pj-verde); }
+        .header-nav-list .has-sub:hover .nav-sub {display: block;}
+        .nav-sub {
+            display: none; position: absolute; top: 100%; left: 0;
+            background: var(--pj-blanco); border: 1px solid var(--pj-borde);
+            box-shadow: 0 4px 16px rgba(45,92,58,0.12); min-width: 200px;
+            z-index: 100; padding: 6px 0; list-style: none;
+        }
+        .nav-sub li a {
+            display: block; padding: 7px 16px; font-size: 0.78rem;
+            color: var(--pj-gris); text-decoration: none;
+        }
+        .nav-sub li a:hover { background: var(--pj-crema); color: var(--pj-verde); }
+
+        /* Quick nav */
+        .nk-header-tools { margin-left: auto; }
+        .nk-quick-nav { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; gap: 4px; }
+        .qnav-icon {
+            display: flex; align-items: center; justify-content: center;
+            width: 34px; height: 34px; border-radius: 50%;
+            color: var(--pj-gris); text-decoration: none; font-size: 1rem;
+            position: relative; transition: background 0.15s, color 0.15s;
+        }
+        .qnav-icon:hover { background: var(--pj-crema); color: var(--pj-verde); }
+        .qnav-icon .dot-notif {
+            position: absolute; top: 5px; right: 5px;
+            width: 7px; height: 7px; background: var(--pj-rojo);
+            border-radius: 50%; border: 1px solid var(--pj-blanco);
+        }
+        .user-chip-hdr {
+            display: flex; align-items: center; gap: 8px;
+            padding: 4px 10px 4px 6px; cursor: pointer;
+        }
+        .user-avatar-hdr {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: var(--pj-verde); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; font-weight: 700;
+        }
+        .user-name-hdr { font-size: 0.77rem; font-weight: 600; color: var(--pj-texto); line-height: 1.2; }
+        .user-dep-hdr  { font-size: 0.62rem; color: var(--pj-gris-lite); }
+
+        /* ══════════════════════════════════
+           NK-CONTENT — FULL-WIDTH IBX
+        ══════════════════════════════════ */
+        .nk-content { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+
+        /* ── Page title bar ── */
+        .ibx-title-bar {
+            background: var(--pj-blanco);
+            border-bottom: 1px solid var(--pj-borde);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .ibx-title-icon {
+            width: 36px; height: 36px;
+            background: var(--pj-verde);
+            color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem;
+            border-bottom: 2px solid var(--pj-dorado);
+            flex-shrink: 0;
+        }
+        .ibx-title-text h5 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.05rem; font-weight: 700;
+            color: var(--pj-verde); margin: 0; line-height: 1.1;
+        }
+        .ibx-title-text p { font-size: 0.68rem; color: var(--pj-gris-lite); margin: 0; }
+        .ibx-title-actions { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+
+        /* Tabs de bandeja */
+        .ibx-nav-tabs {
+            display: flex;
+            background: var(--pj-blanco);
+            border-bottom: 1px solid var(--pj-borde);
+            padding: 0 20px;
+            gap: 0;
+            flex-shrink: 0;
+            overflow-x: auto;
+        }
+        .ibx-nav-tabs::-webkit-scrollbar { height: 2px; }
+        .ibx-nav-tab {
+            display: flex; align-items: center; gap: 7px;
+            padding: 10px 16px;
+            font-size: 0.78rem; font-weight: 600;
+            color: var(--pj-gris-lite); cursor: pointer;
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+            transition: color 0.15s, border-color 0.15s;
+        }
+        .ibx-nav-tab:hover { color: var(--pj-verde); }
+        .ibx-nav-tab.active { color: var(--pj-verde); border-bottom-color: var(--pj-verde); }
+        .ibx-nav-tab .tab-count {
+            font-size: 0.6rem; font-weight: 700;
+            padding: 1px 6px; border-radius: 10px;
+        }
+        .tc-rojo   { background: var(--pj-rojo);   color: #fff; }
+        .tc-dorado { background: var(--pj-dorado); color: var(--pj-texto); }
+        .tc-verde  { background: var(--pj-verde);  color: #fff; }
+        .tc-gris   { background: var(--pj-crema);  color: var(--pj-gris); border: 1px solid var(--pj-borde); }
+
+        /* ══════════════════════════════════
+           NK-IBX (sin sidebar)
+        ══════════════════════════════════ */
+        .nk-ibx {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* ══════════════════════════════════
+           NK-IBX-BODY — lista completa
+        ══════════════════════════════════ */
+        .nk-ibx-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: var(--pj-blanco);
+            position: relative;
+        }
+
+        /* Toolbar de la lista */
+        .nk-ibx-head {
+            padding: 9px 16px;
+            border-bottom: 1px solid var(--pj-borde);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--pj-crema-lite);
+            flex-shrink: 0;
+        }
+        .nk-ibx-head-actions { display: flex; align-items: center; gap: 4px; }
+        .nk-ibx-head-tools { display: flex; list-style: none; padding: 0; margin: 0; gap: 2px; }
+
+        .btn-trigger {
+            background: none; border: none; cursor: pointer;
+            color: var(--pj-gris-lite); padding: 5px 7px; font-size: 0.9rem;
+            border-radius: 3px; transition: background 0.12s, color 0.12s;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none;
+        }
+        .btn-trigger:hover { background: var(--pj-crema); color: var(--pj-verde); }
+        .btn-trigger.text-btn {
+            font-size: 0.75rem; font-weight: 600; gap: 5px;
+            padding: 5px 10px; color: var(--pj-gris);
+        }
+
+        /* Buscador inline */
+        .ibx-search-inline {
+            flex: 1; max-width: 380px;
+            position: relative;
+        }
+        .ibx-search-inline .bi-search {
+            position: absolute; left: 9px; top: 50%; transform: translateY(-50%);
+            color: var(--pj-gris-lite); font-size: 0.78rem;
+        }
+        .ibx-search-inline input {
+            width: 100%;
+            border: 1px solid var(--pj-borde); background: var(--pj-crema);
+            padding: 6px 12px 6px 28px;
+            font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
+            border-radius: 0; outline: none; color: var(--pj-texto);
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        .ibx-search-inline input:focus {
+            border-color: var(--pj-verde-mid);
+            box-shadow: 0 0 0 2px rgba(61,122,80,0.10);
+        }
+
+        /* Selección info */
+        .sel-info {
+            font-size: 0.73rem; color: var(--pj-gris-lite);
+            white-space: nowrap;
+        }
+        .sel-info strong { color: var(--pj-verde); }
+
+        /* ══════════════════════════════════
+           NK-IBX-LIST — Filas de oficios
+        ══════════════════════════════════ */
+        .nk-ibx-list { flex: 1; overflow-y: auto; }
+        .nk-ibx-list::-webkit-scrollbar { width: 4px; }
+        .nk-ibx-list::-webkit-scrollbar-thumb { background: var(--pj-borde); }
+
+        /* Agrupadores de fecha */
+        .ibx-date-group {
+            padding: 5px 16px;
+            font-size: 0.62rem; font-weight: 700;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--pj-gris-lite);
+            background: var(--pj-crema);
+            border-bottom: 1px solid var(--pj-borde);
+            border-top: 1px solid var(--pj-borde);
+        }
+
+        /* Item */
+        .nk-ibx-item {
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            min-height: 52px;
+            border-bottom: 1px solid var(--pj-borde);
+            cursor: pointer;
+            position: relative;
+            transition: background 0.12s;
+            gap: 0;
+        }
+        .nk-ibx-item:hover { background: var(--pj-crema-lite); }
+        .nk-ibx-item.active {
+            background: var(--pj-verde-lite);
+            border-left: 3px solid var(--pj-verde);
+        }
+        .nk-ibx-item.is-unread { background: var(--pj-blanco); }
+        .nk-ibx-item.is-unread::before {
+            content: '';
+            position: absolute; left: 5px; top: 50%; transform: translateY(-50%);
+            width: 5px; height: 5px; background: var(--pj-rojo); border-radius: 50%;
+        }
+
+        /* Columnas de la fila */
+        .nk-ibx-item-elem { flex-shrink: 0; }
+
+        .nk-ibx-item-check { width: 28px; padding-left: 4px; }
+        .nk-ibx-item-check input {
+            width: 13px; height: 13px;
+            accent-color: var(--pj-verde); cursor: pointer;
+        }
+
+        .nk-ibx-item-star  { width: 24px; }
+        .star-link { color: var(--pj-borde); font-size: 0.82rem; text-decoration: none; transition: color 0.12s; }
+        .star-link:hover, .star-link.on { color: var(--pj-dorado); }
+
+        /* Folio + tipo — columna fija */
+        .nk-ibx-item-folio { width: 200px; padding-right: 10px; }
+        .folio-num {
+            font-family: 'Crimson Pro', serif;
+            font-size: 0.8rem; font-weight: 700;
+            color: var(--pj-verde); white-space: nowrap;
+        }
+        .folio-tipo {
+            font-size: 0.65rem; color: var(--pj-gris-lite);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+
+        /* Remitente */
+        .nk-ibx-item-user { width: 170px; padding-right: 10px; }
+        .user-card-ibx { display: flex; align-items: center; gap: 7px; }
+        .user-av {
+            width: 28px; height: 28px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.62rem; font-weight: 700; color: #fff; flex-shrink: 0;
+        }
+        .av-verde  { background: var(--pj-verde); }
+        .av-rojo   { background: var(--pj-rojo); }
+        .av-dorado { background: var(--pj-dorado); color: var(--pj-texto); }
+        .av-gris   { background: var(--pj-gris); }
+        .av-900    { background: var(--pj-verde-900); }
+        .user-name-ibx {
+            font-size: 0.78rem; font-weight: 600; color: var(--pj-texto);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;
+        }
+        .is-unread .user-name-ibx { font-weight: 700; }
+
+        /* Contexto (asunto + preview) — flexible */
+        .nk-ibx-item-fluid { flex: 1; min-width: 0; padding: 0 8px; }
+        .nk-ibx-context-group { display: flex; align-items: center; gap: 8px; overflow: hidden; }
+        .nk-ibx-context-badges .badge-ibx {
+            font-size: 0.57rem; font-weight: 700;
+            padding: 2px 7px; letter-spacing: 0.05em; text-transform: uppercase;
+            white-space: nowrap; border-radius: 2px;
+        }
+        .bi-urgente   { background: var(--pj-rojo-lite); color: var(--pj-rojo); border: 1px solid rgba(139,37,49,0.2); }
+        .bi-pendiente { background: #fff8e6; color: #8a6200; border: 1px solid rgba(201,164,64,0.35); }
+        .bi-firmado   { background: var(--pj-verde-lite); color: var(--pj-verde); border: 1px solid rgba(45,92,58,0.2); }
+        .bi-borrador  { background: var(--pj-crema); color: var(--pj-gris); border: 1px solid var(--pj-borde); }
+
+        .nk-ibx-context-text {
+            font-size: 0.79rem; color: var(--pj-gris);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .nk-ibx-context-text .heading { font-weight: 600; color: var(--pj-texto); margin-right: 4px; }
+        .is-unread .nk-ibx-context-text .heading { font-weight: 700; }
+
+        /* Adjunto */
+        .nk-ibx-item-attach { width: 22px; text-align: center; }
+        .nk-ibx-item-attach a { color: var(--pj-gris-lite); font-size: 0.82rem; }
+
+        /* Tiempo */
+        .nk-ibx-item-time { width: 80px; text-align: right; }
+        .time-text { font-size: 0.68rem; color: var(--pj-gris-lite); }
+
+        /* Acciones hover */
+        .nk-ibx-item-tools { width: 64px; text-align: right; }
+        .ibx-actions { display: flex; align-items: center; justify-content: flex-end; }
+        .ibx-actions-hidden {
+            display: none; list-style: none; padding: 0; margin: 0; gap: 2px;
+        }
+        .nk-ibx-item:hover .ibx-actions-hidden { display: flex; }
+        .nk-ibx-item:hover .nk-ibx-item-time   { display: none; }
+        .ibx-actions-visible { list-style: none; padding: 0; margin: 0; }
+
+        /* ══════════════════════════════════
+           NK-IBX-VIEW (panel detalle overlay)
+        ══════════════════════════════════ */
+        .nk-ibx-view {
+            position: absolute; inset: 0;
+            background: var(--pj-crema-lite);
+            display: flex; flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+            z-index: 10;
+        }
+        .nk-ibx-view.is-open { transform: translateX(0); }
+
+        /* Toolbar detalle */
+        .nk-ibx-view .nk-ibx-head {
+            background: var(--pj-blanco);
+            border-bottom: 1px solid var(--pj-borde);
+            padding: 10px 16px; flex-shrink: 0;
+        }
+
+        /* Reply body */
+        .nk-ibx-reply {
+            flex: 1; overflow-y: auto;
+            padding: 20px 24px;
+        }
+        .nk-ibx-reply::-webkit-scrollbar { width: 4px; }
+        .nk-ibx-reply::-webkit-scrollbar-thumb { background: var(--pj-borde); }
+
+        /* Encabezado del oficio en detalle */
+        .nk-ibx-reply-head {
+            display: flex; justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--pj-borde);
+        }
+        .nk-ibx-reply-head .title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.3rem; font-weight: 700;
+            color: var(--pj-verde); margin: 0 0 8px;
+        }
+        .reply-tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0; }
+        .reply-tag {
+            font-size: 0.65rem; font-weight: 700;
+            padding: 3px 10px; letter-spacing: 0.05em;
+            text-transform: uppercase; border-radius: 2px;
+            display: inline-flex; align-items: center; gap: 4px;
+        }
+        .rt-urgente   { background: var(--pj-rojo-lite); color: var(--pj-rojo); border: 1px solid rgba(139,37,49,0.2); }
+        .rt-pendiente { background: #fff8e6; color: #8a6200; border: 1px solid rgba(201,164,64,0.35); }
+        .rt-info      { background: var(--pj-crema); color: var(--pj-gris); border: 1px solid var(--pj-borde); }
+
+        /* Reply items */
+        .nk-ibx-reply-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+        .nk-reply-item { background: var(--pj-blanco); border: 1px solid var(--pj-borde); }
+
+        .nk-reply-header {
+            display: flex; align-items: flex-start;
+            justify-content: space-between;
+            padding: 12px 16px; cursor: pointer;
+        }
+        .nk-reply-header.is-collapsed { background: var(--pj-crema-lite); }
+
+        .nk-reply-desc { display: flex; align-items: flex-start; gap: 10px; }
+        .reply-avatar {
+            width: 34px; height: 34px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.68rem; font-weight: 700; color: #fff; flex-shrink: 0;
+        }
+        .nk-reply-info { flex: 1; }
+        .reply-author  { font-size: 0.82rem; font-weight: 700; color: var(--pj-texto); }
+        .reply-author .date { font-size: 0.68rem; color: var(--pj-gris-lite); font-weight: 400; margin-left: 8px; }
+        .reply-to      { font-size: 0.73rem; color: var(--pj-gris-lite); }
+        .reply-excerpt { font-size: 0.73rem; color: var(--pj-gris-lite); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 440px; }
+
+        .nk-reply-tools { display: flex; align-items: center; gap: 4px; list-style: none; padding: 0; margin: 0; flex-shrink: 0; }
+        .nk-reply-tools .date { font-size: 0.7rem; color: var(--pj-gris-lite); }
+
+        .nk-reply-body { padding: 0 16px 14px 58px; }
+        .nk-reply-entry { font-size: 0.85rem; line-height: 1.7; color: var(--pj-gris); }
+        .nk-reply-entry p { margin-bottom: 8px; }
+
+        /* Firma verificada */
+        .firma-verified {
+            display: flex; align-items: center; gap: 10px;
+            background: var(--pj-verde-lite);
+            border: 1px solid rgba(45,92,58,0.2);
+            border-left: 3px solid var(--pj-verde);
+            padding: 9px 14px; margin: 0 16px 12px 58px;
+            font-size: 0.75rem;
+        }
+        .firma-verified .bi { color: var(--pj-verde); font-size: 1.1rem; }
+        .firma-label { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pj-verde); font-weight: 700; }
+        .firma-val   { color: var(--pj-gris); }
+
+        /* Adjuntos */
+        .attach-section { margin: 0 16px 12px 58px; }
+        .attach-section .attach-title {
+            font-size: 0.67rem; letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--pj-gris-lite); font-weight: 700; margin-bottom: 8px;
+        }
+        .attach-items { display: flex; flex-wrap: wrap; gap: 6px; }
+        .attach-chip {
+            display: flex; align-items: center; gap: 7px;
+            padding: 6px 10px; border: 1px solid var(--pj-borde);
+            background: var(--pj-crema); font-size: 0.75rem;
+            color: var(--pj-texto); text-decoration: none; cursor: pointer;
+            transition: border-color 0.12s;
+        }
+        .attach-chip:hover { border-color: var(--pj-verde-mid); color: var(--pj-verde); }
+        .attach-chip .bi { color: var(--pj-rojo); }
+        .attach-size { color: var(--pj-gris-lite); font-size: 0.67rem; }
+
+        /* Reply form */
+        .nk-reply-form {
+            background: var(--pj-blanco);
+            border: 1px solid var(--pj-borde);
+            border-top: 3px solid var(--pj-verde);
+            flex-shrink: 0;
+        }
+        .nk-reply-form-header {
+            padding: 9px 14px; border-bottom: 1px solid var(--pj-borde);
+            background: var(--pj-crema-lite);
+        }
+        .reply-form-row { display: flex; align-items: center; gap: 8px; }
+        .reply-form-label {
+            font-size: 0.67rem; font-weight: 700; color: var(--pj-verde);
+            letter-spacing: 0.08em; text-transform: uppercase; width: 30px; flex-shrink: 0;
+        }
+        .reply-form-input {
+            flex: 1; border: none; background: transparent;
+            font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
+            color: var(--pj-texto); outline: none;
+        }
+        .reply-form-nav { display: flex; gap: 8px; flex-shrink: 0; }
+        .reply-form-nav a { font-size: 0.72rem; color: var(--pj-verde-mid); text-decoration: none; font-weight: 600; }
+        .reply-form-editor { padding: 10px 14px; }
+        .reply-form-editor textarea {
+            width: 100%; border: none; background: transparent;
+            font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+            color: var(--pj-gris); resize: none; height: 72px; outline: none;
+        }
+        .reply-form-tools {
+            padding: 8px 14px; border-top: 1px solid var(--pj-borde);
+            display: flex; justify-content: space-between; align-items: center;
+            background: var(--pj-crema-lite);
+        }
+        .reply-actions { display: flex; list-style: none; padding: 0; margin: 0; gap: 4px; align-items: center; }
+
+        .btn-pj-send {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--pj-verde); color: #fff;
+            border: none; border-bottom: 2px solid var(--pj-dorado);
+            font-family: 'DM Sans', sans-serif; font-size: 0.77rem;
+            font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+            padding: 7px 14px; cursor: pointer; transition: background 0.15s;
+        }
+        .btn-pj-send:hover { background: var(--pj-verde-mid); }
+
+        /* Botones generales */
+        .btn-pj {
+            display: inline-flex; align-items: center; gap: 6px;
+            border: none; cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.77rem; font-weight: 600;
+            padding: 7px 14px; border-radius: 0;
+            transition: background 0.15s; text-decoration: none;
+        }
+        .btn-pj-primary {
+            background: var(--pj-verde); color: #fff;
+            border-bottom: 2px solid var(--pj-dorado);
+        }
+        .btn-pj-primary:hover { background: var(--pj-verde-mid); color: #fff; }
+        .btn-pj-outline {
+            background: var(--pj-blanco); color: var(--pj-gris);
+            border: 1px solid var(--pj-borde);
+        }
+        .btn-pj-outline:hover { background: var(--pj-crema); color: var(--pj-verde); }
+        .btn-pj-danger {
+            background: transparent; color: var(--pj-rojo);
+            border: 1px solid rgba(139,37,49,0.3);
+        }
+        .btn-pj-danger:hover { background: var(--pj-rojo-lite); }
+
+        /* ══════════════════════════════════
+           FOOTER
+        ══════════════════════════════════ */
+        .nk-footer {
+            background: var(--pj-verde); padding: 10px 20px; flex-shrink: 0;
+        }
+        .nk-footer-wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+        .nk-footer-copy { font-size: 0.68rem; color: rgba(255,255,255,0.5); }
+        .nk-footer-links a {
+            font-size: 0.68rem; color: var(--pj-dorado-lite);
+            text-decoration: none; margin-left: 14px;
+        }
+        .nk-footer-links a:hover { text-decoration: underline; }
+
+        /* ══════════════════════════════════
+           RESPONSIVE
+        ══════════════════════════════════ */
+        @media (max-width: 991px) {
+            .nk-ibx-item-folio { display: none; }
+            .nk-ibx-item-user  { width: 130px; }
+        }
+        @media (max-width: 767px) {
+            .nk-header-nav  { display: none; }
+            .user-dep-hdr   { display: none; }
+            .nk-ibx-item-user { width: 110px; }
+            .ibx-search-inline { max-width: 160px; }
+            .ibx-title-bar { padding: 8px 12px; }
+            .ibx-nav-tabs  { padding: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+<div class="nk-app-root">
+<div class="nk-wrap">
+
+    <!-- ═══ GOV TOPBAR ═══ -->
+    <div class="gov-topbar">
+        <span class="gov-name">
+            <i class="bi bi-building me-1"></i>
+            Gobierno del Estado de Quintana Roo &nbsp;·&nbsp; Poder Judicial
+        </span>
+        <div class="gov-links">
+            <a href="#">Directorio</a>
+            <a href="#">Transparencia</a>
+            <a href="#">LGPE</a>
+            <a href="#">Soporte</a>
+        </div>
+    </div>
+
+    <!-- ═══ NK-HEADER ═══ -->
+    <div class="nk-header">
+        <div class="nk-header-wrap">
+
+            <!-- Brand -->
+            <a class="nk-header-brand" href="#">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAA3AJ8DASIAAhEBAxEB/8QAHAAAAQUBAQEAAAAAAAAAAAAAAAMEBQYHAgEI/8QAOBAAAQMDAwIEBAQFAwUAAAAAAQIDBAAFEQYSITFBEyJRYQcUcZEVMkKBCBY2dLMjodEXM1Jysf/EABoBAQEAAwEBAAAAAAAAAAAAAAABBAUGAwL/xAAnEQACAQQBBAICAwEAAAAAAAAAAQIDBBEhMQUSQVEToWFxFDKBkf/aAAwDAQACEQMRAD8A+MqKKKAKKKKAsXw604dVasi2hS3G2FbnJC2wCpLaRlWM8ZPQZ4yRnit4VpDQciKbeNOwm4ilhDUpt/z7hx+fduIJHCjxkYIwSaq38OiEL0zd9wScTE4CsAE+ErAORzyBxVq1w3FTPgB0JDOClxTSAVbSRnHuMn7VzMvm6n1eNjCbgt7WXxFyzhNZesLZvZ0aVh0qV9NdzwtccyUed8c8I+fdbWNem9VT7KpanBGdwhZGCpBAUkn32kUmn+knP79P+NVWv4veCPkExlLVHS48GitOFbfLjPvVUT/AEk5/fp/xqrq61vK2l8U3lpLeMZ0nxvH6Obt7hXNP5EsJ5884bXPkv2jZUm1fCf8Ut1ghXSULupt3xonilLXhAk8cgZA56c1HXXTb+oZU+9TIS9PSZEyNHh29TBAd3kIUUZwTtA3HAqqWfUd6tcb5KFcZDUNS9zkdLhCF5xkED1Awa3LUUafpywTNUySu9ajUja26GyWooV1Daf0oSMnPU4561ruodRhawjDmctRX59t+lk++l9Dr3FzOqmlCL7pS2325T7Uvbw1nwZxHgv6E1pPYh2trUqW4Sk5WyVIbPkUpZAB/KeD7HqKX+K5ekaN0rcJtnjWufIVK8dpmN4P5VpCcjr0wefWrrZbDqW2aEkXuJoeaETbKXJU8XFspfSporL5SXM5wSrpnnpWJ3q/Xm9JaTdrnJmhnPh+Msq25xnH2H2rXWb/AJNVTUk3DTedvTXCbS3slanOdw6vxOnHOk+cYI2iiit6eoUUUUAUUUUAUVKr05qBCFLVZbgEp5Ufl1cf7VGJQtSwhKVFZOAkDkn0oDmipCbZLxCjCTLtkthk/rW0QPvXFvtN0uDanINvkyUJVtKmmioA+nHegGVFO7hbLjbyBPgyYu7p4rZTn70tDsV5mx0SIlrmPsrzsW2ypSVYODgj3oDb/wCGtqKn4a6wlOW1MmX8ywzEeVGU6GFltwlR2g7QAM5PGQK0uVd9Lrmy3WrRbEsqtYajpVEPkmckrPl4Tk9fYcV8r23+dtPOGNbV321KneRTcdbjPj4B4ITjdxn/AHpaVK1/GjKkSJWommUjzLU66EgfXNc7cdCVe4nVlL+z1vHhL0/X2z2nc3CjGNKaSXuLfv1KPv16NM/iljw06f0LLj2tEF96PKRKKYxZ8V1BaBVggEg5yDjvWPp/pJz+/T/jVSd7vl6va2l3m7z7kplO1oy5C3Sgeg3E4H0pdy239q2JjLtctMd19C0ksHzLI2pAOO+elbTp1rK0t40pPLWftt/WcErVPkl3fr6WC1WKOw38JXpbGno9znybi5EDpY3utJLWQpJAzkHp7mnPxK+IF5eub9pYjyLfETFVGdjyUgOK3jlSgDwdpGPTJ9agLRcNdaeaatdvFxhpkOKW2yGOVqAG7GRk4AGajrrC1Ndby89cIM6RcHUB1zcyd5QPKFYx04x+1Y0Ond1w6lZJrLa22948ceDZz6l22yp0W08JPSS1nzzydetRfEp25Ro1r0PpG1Xl5zSKEXAwwtSoTZBS4wAP0IynA9xVF+OTMB7Q2hr4xpS36bm3ETvmo0WN4P8A23EIRkEA9ORn/wAjVLsM7WmhZjl2rabHeWlKvhOFZ7ZzXmpr5bbqxb2YtpciIho8JKfmSsFvOcYwOSScnvQHdziv2f4gKjNvvJ2zE+G4HCVFtRBT5u/lIp3qm2XS/a/ukOChcl1pakBK3ANqAR0yeBlXT3ri5alss24WyUqwupEFCWsfOHK0IB2AnHUHBz3xipCJri0xL2/eo+nXUznwQ4tU0lJyQTxt9hQhQ6KKKFCrJbplpRFgJkJYVsUnckxyVBQUrcSruCCnjnt6UUUB33YxHYrbjK2g8lxYcSlBBVk5BzjBGPpUpIl2tciTt8FthcdIbUhk70kA8AEY5OAfuDRRQCJnWmSy+JaUBxyMhpotxwkIWEhSl8d9wA+hNOTOtJmlQMVKyMpc+VOxLe8HYU91bc+b9veiigGNuk2xDc/ehtLa3SUIca3qLeFYSk/pOSnn/ivXZFoF8tzzrKXLejwy822kgkDG7IP79/3oooCxS1WONcGjdG4hWWo8pbjUQhuQkFwlKUjG0qSpscgAlJz7soFw0wj5MTo7T4EJhp0IYKSFh3K1Z7kJ2898Ed6KKEOWrrYFm3okx2AxHkvvPJbi4U4lPLKM9wcnOe3WvHJml0wpsZphtbjhfVFeUyoFAWUbUkewKsHsU+9FFCiVwk6ZOqLXLhIxb0FKJLS2euw43Y77k4P3zT5m56WL8t9TLQS8htSkri5KkBshaE44QsrwdwwOnpiiigIvUMyzPWCKzCbaDwLexKWNq2gG8Oha/17l4I9AD0ziq1RRQBRRRQH/9k=" alt="PJQROO">
+                <div class="brand-vr"></div>
+                <div>
+                    <div class="brand-title">Sistema de Oficios</div>
+                    <div class="brand-sub">Poder Judicial · QR</div>
+                </div>
+            </a>
+
+            <!-- Nav principal -->
+            <nav class="nk-header-nav d-none d-lg-block">
+                <ul class="header-nav-list">
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link-pj"><i class="bi bi-inbox me-1"></i>Bandeja</a>
+                    </li>
+                    <li class="nav-item has-sub">
+                        <a href="#" class="nav-link-pj nk-menu-toggle">
+                            Oficios <i class="bi bi-chevron-down" style="font-size:0.6rem;"></i>
+                        </a>
+                        <ul class="nav-sub">
+                            <li><a href="#">Nuevo Oficio</a></li>
+                            <li><a href="#">Enviados</a></li>
+                            <li><a href="#">Urgentes</a></li>
+                            <li><a href="#">Archivo</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-sub">
+                        <a href="#" class="nav-link-pj nk-menu-toggle">
+                            Seguimiento <i class="bi bi-chevron-down" style="font-size:0.6rem;"></i>
+                        </a>
+                        <ul class="nav-sub">
+                            <li><a href="#">Turnar Oficio</a></li>
+                            <li><a href="#">Expedientes</a></li>
+                            <li><a href="#">Firma Digital</a></li>
+                            <li><a href="#">Reportes</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link-pj">Directorio</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Quick nav -->
+            <div class="nk-header-tools">
+                <ul class="nk-quick-nav">
+                    <li>
+                        <a href="#" class="qnav-icon" title="Notificaciones">
+                            <i class="bi bi-bell"></i>
+                            <span class="dot-notif"></span>
+                        </a>
+                    </li>
+                    <li class="d-none d-sm-block">
+                        <a href="#" class="qnav-icon" title="Configuración">
+                            <i class="bi bi-gear"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="user-chip-hdr">
+                            <div class="user-avatar-hdr">MRL</div>
+                            <div class="d-none d-md-block">
+                                <div class="user-name-hdr">Mtra. Rosa López</div>
+                                <div class="user-dep-hdr">Sec. Gral. de Acuerdos</div>
+                            </div>
+                            <i class="bi bi-chevron-down ms-1" style="font-size:0.6rem; color:var(--pj-gris-lite);"></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="franja-tricolor"></div>
+
+    <!-- ═══ NK-CONTENT ═══ -->
+    <div class="nk-content">
+
+        <!-- Title bar -->
+        <div class="ibx-title-bar">
+            <div class="ibx-title-icon"><i class="bi bi-inbox-fill"></i></div>
+            <div class="ibx-title-text">
+                <h5>Bandeja de Oficios</h5>
+                <p>Recibidos · Secretaría General de Acuerdos · SOQROO v3.1</p>
+            </div>
+            <div class="ibx-title-actions">
+                <a href="#" class="btn-pj btn-pj-primary">
+                    <i class="bi bi-plus-lg"></i>
+                    <span class="d-none d-sm-inline">Nuevo Oficio</span>
+                </a>
+                <a href="#" class="btn-pj btn-pj-outline d-none d-md-inline-flex">
+                    <i class="bi bi-bar-chart-line"></i> Reportes
+                </a>
+                <a href="#" class="btn-pj btn-pj-outline d-none d-md-inline-flex">
+                    <i class="bi bi-shield-check"></i> Firma Digital
+                </a>
+            </div>
+        </div>
+
+        <!-- Nav tabs de bandejas -->
+        <div class="ibx-nav-tabs">
+            <div class="ibx-nav-tab active" onclick="setTab(this)">
+                <i class="bi bi-inbox"></i> Recibidos
+                <span class="tab-count tc-rojo">12</span>
+            </div>
+            <div class="ibx-nav-tab" onclick="setTab(this)">
+                <i class="bi bi-send"></i> Enviados
+            </div>
+            <div class="ibx-nav-tab" onclick="setTab(this)">
+                <i class="bi bi-pencil-square"></i> Borradores
+                <span class="tab-count tc-gris">3</span>
+            </div>
+            <div class="ibx-nav-tab" onclick="setTab(this)">
+                <i class="bi bi-exclamation-circle"></i> Urgentes
+                <span class="tab-count tc-rojo">5</span>
+            </div>
+            <div class="ibx-nav-tab" onclick="setTab(this)">
+                <i class="bi bi-clock-history"></i> Pendientes
+                <span class="tab-count tc-dorado">8</span>
+            </div>
+            <div class="ibx-nav-tab" onclick="setTab(this)">
+                <i class="bi bi-check2-circle"></i> Firmados
+                <span class="tab-count tc-verde">24</span>
+            </div>
+            <div class="ibx-nav-tab" onclick="setTab(this)">
+                <i class="bi bi-archive"></i> Archivados
+            </div>
+        </div>
+
+        <!-- NK-IBX -->
+        <div class="nk-ibx">
+
+            <!-- NK-IBX-BODY -->
+            <div class="nk-ibx-body">
+
+                <!-- ── Toolbar lista ── -->
+                <div class="nk-ibx-head">
+                    <div class="nk-ibx-head-actions">
+                        <div style="margin-right:4px;">
+                            <input type="checkbox" id="checkAll"
+                                style="width:13px;height:13px;accent-color:var(--pj-verde);cursor:pointer;"
+                                onchange="toggleAll(this)">
+                        </div>
+                        <ul class="nk-ibx-head-tools">
+                            <li>
+                                <a href="#" class="btn-trigger" title="Actualizar">
+                                    <i class="bi bi-arrow-clockwise"></i>
+                                </a>
+                            </li>
+                            <li class="d-none d-sm-block">
+                                <a href="#" class="btn-trigger" title="Archivar selección">
+                                    <i class="bi bi-archive"></i>
+                                </a>
+                            </li>
+                            <li class="d-none d-sm-block">
+                                <a href="#" class="btn-trigger" title="Eliminar selección">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <div class="dropdown">
+                                    <a href="#" class="btn-trigger dropdown-toggle" data-bs-toggle="dropdown">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" style="border-radius:0;border-color:var(--pj-borde);font-size:0.78rem;">
+                                        <li><a class="dropdown-item" href="#"><i class="bi bi-folder2-open me-2"></i>Mover a…</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="bi bi-tag me-2"></i>Etiquetar</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Marcar como no leído</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#"><i class="bi bi-trash me-2"></i>Eliminar</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                        <span class="sel-info ms-2 d-none d-md-inline" id="selInfo"></span>
+                    </div>
+
+                    <!-- Buscador inline -->
+                    <div class="ibx-search-inline ms-2">
+                        <i class="bi bi-search"></i>
+                        <input type="text" placeholder="Buscar oficio, remitente, folio…">
+                    </div>
+
+                    <!-- Tools derecha -->
+                    <div class="ms-auto d-flex gap-1">
+                        <a href="#" class="btn-trigger" title="Filtrar">
+                            <i class="bi bi-funnel"></i>
+                        </a>
+                        <a href="#" class="btn-trigger" title="Ordenar">
+                            <i class="bi bi-sort-down"></i>
+                        </a>
+                        <a href="#" class="btn-trigger d-none d-sm-flex" title="Anterior">
+                            <i class="bi bi-chevron-left"></i>
+                        </a>
+                        <a href="#" class="btn-trigger d-none d-sm-flex" title="Siguiente">
+                            <i class="bi bi-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ── Lista de oficios ── -->
+                <div class="nk-ibx-list">
+
+                    <!-- Agrupador HOY -->
+                    <div class="ibx-date-group">Hoy — 11 de abril de 2025</div>
+
+                    <!-- ── Oficio 1 (no leído, activo) ── -->
+                    <div class="nk-ibx-item is-unread active" onclick="openView(this)">
+                        <div class="nk-ibx-item-elem nk-ibx-item-check">
+                            <input type="checkbox" onclick="event.stopPropagation(); updateSel()">
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-star">
+                            <a href="#" class="star-link" onclick="toggleStar(event,this)">
+                                <i class="bi bi-star"></i>
+                            </a>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-folio">
+                            <div class="folio-num">OFICIO-TSJ-2025-0892</div>
+                            <div class="folio-tipo">Convocatoria · Ordinario</div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-user">
+                            <div class="user-card-ibx">
+                                <div class="user-av av-rojo">PJ</div>
+                                <div class="user-name-ibx">Presidencia TSJ</div>
+                            </div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-fluid">
+                            <div class="nk-ibx-context-group">
+                                <div class="nk-ibx-context-badges">
+                                    <span class="badge-ibx bi-urgente">
+                                        <i class="bi bi-exclamation-triangle-fill"></i> Urgente
+                                    </span>
+                                </div>
+                                <div class="nk-ibx-context">
+                                    <span class="nk-ibx-context-text">
+                                        <span class="heading">Convocatoria sesión plenaria</span>
+                                        Se convoca a sesión plenaria ordinaria para el 08 de abril…
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-attach">
+                            <a href="#" onclick="event.stopPropagation()"><i class="bi bi-paperclip"></i></a>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-time">
+                            <div class="time-text">09:14</div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-tools">
+                            <div class="ibx-actions">
+                                <ul class="ibx-actions-hidden">
+                                    <li>
+                                        <a href="#" class="btn-trigger" title="Archivar"
+                                           onclick="event.stopPropagation()">
+                                            <i class="bi bi-archive"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="btn-trigger" title="Eliminar"
+                                           onclick="event.stopPropagation()">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="ibx-actions-visible">
+                                    <li>
+                                        <div class="dropdown">
+                                            <a href="#" class="btn-trigger dropdown-toggle"
+                                               data-bs-toggle="dropdown"
+                                               onclick="event.stopPropagation()">
+                                                <i class="bi bi-three-dots"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-end"
+                                                style="border-radius:0;border-color:var(--pj-borde);font-size:0.78rem;">
+                                                <li><a class="dropdown-item" href="#">Ver</a></li>
+                                                <li><a class="dropdown-item" href="#">Turnar</a></li>
+                                                <li><a class="dropdown-item" href="#">Archivar</a></li>
+                                                <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ── Oficio 2 ── -->
+                    <div class="nk-ibx-item is-unread" onclick="openView(this)">
+                        <div class="nk-ibx-item-elem nk-ibx-item-check"><input type="checkbox" onclick="event.stopPropagation();updateSel()"></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-star"><a href="#" class="star-link on" onclick="toggleStar(event,this)"><i class="bi bi-star-fill"></i></a></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-folio">
+                            <div class="folio-num">OFICIO-DA-2025-0341</div>
+                            <div class="folio-tipo">Solicitud · Ordinario</div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-user">
+                            <div class="user-card-ibx">
+                                <div class="user-av av-verde">DA</div>
+                                <div class="user-name-ibx">Dir. Administración</div>
+                            </div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-fluid">
+                            <div class="nk-ibx-context-group">
+                                <div class="nk-ibx-context-badges"><span class="badge-ibx bi-pendiente">Pendiente</span></div>
+                                <div class="nk-ibx-context"><span class="nk-ibx-context-text"><span class="heading">Actualización de nómina Q2</span>En atención a la circular emitida, se solicita la actualización…</span></div>
+                            </div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-attach"></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-time"><div class="time-text">08:50</div></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-tools"><div class="ibx-actions"><ul class="ibx-actions-hidden"><li><a href="#" class="btn-trigger" onclick="event.stopPropagation()"><i class="bi bi-archive"></i></a></li><li><a href="#" class="btn-trigger" onclick="event.stopPropagation()"><i class="bi bi-trash"></i></a></li></ul><ul class="ibx-actions-visible"><li><div class="dropdown"><a href="#" class="btn-trigger dropdown-toggle" data-bs-toggle="dropdown" onclick="event.stopPropagation()"><i class="bi bi-three-dots"></i></a><ul class="dropdown-menu dropdown-menu-end" style="border-radius:0;border-color:var(--pj-borde);font-size:0.78rem;"><li><a class="dropdown-item" href="#">Ver</a></li><li><a class="dropdown-item" href="#">Archivar</a></li><li><a class="dropdown-item" href="#">Eliminar</a></li></ul></div></li></ul></div></div>
+                    </div>
+
+                    <!-- ── Oficio 3 ── -->
+                    <div class="nk-ibx-item is-unread" onclick="openView(this)">
+                        <div class="nk-ibx-item-elem nk-ibx-item-check"><input type="checkbox" onclick="event.stopPropagation();updateSel()"></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-star"><a href="#" class="star-link" onclick="toggleStar(event,this)"><i class="bi bi-star"></i></a></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-folio">
+                            <div class="folio-num">OFICIO-DJ-2025-0218</div>
+                            <div class="folio-tipo">Dictamen · Ordinario</div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-user">
+                            <div class="user-card-ibx">
+                                <div class="user-av av-dorado">DJ</div>
+                                <div class="user-name-ibx">Dir. Jurídica</div>
+                            </div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-fluid">
+                            <div class="nk-ibx-context-group">
+                                <div class="nk-ibx-context-badges"><span class="badge-ibx bi-pendiente">Pendiente</span></div>
+                                <div class="nk-ibx-context"><span class="nk-ibx-context-text"><span class="heading">Dictamen reforma procesal 2025</span>Se remite el dictamen jurídico correspondiente a la reforma…</span></div>
+                            </div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-attach"><a href="#" onclick="event.stopPropagation()"><i class="bi bi-paperclip"></i></a></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-time"><div class="time-text">07:20</div></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-tools"><div class="ibx-actions"><ul class="ibx-actions-hidden"><li><a href="#" class="btn-trigger" onclick="event.stopPropagation()"><i class="bi bi-archive"></i></a></li><li><a href="#" class="btn-trigger" onclick="event.stopPropagation()"><i class="bi bi-trash"></i></a></li></ul><ul class="ibx-actions-visible"><li><div class="dropdown"><a href="#" class="btn-trigger dropdown-toggle" data-bs-toggle="dropdown" onclick="event.stopPropagation()"><i class="bi bi-three-dots"></i></a><ul class="dropdown-menu dropdown-menu-end" style="border-radius:0;border-color:var(--pj-borde);font-size:0.78rem;"><li><a class="dropdown-item" href="#">Ver</a></li><li><a class="dropdown-item" href="#">Archivar</a></li><li><a class="dropdown-item" href="#">Eliminar</a></li></ul></div></li></ul></div></div>
+                    </div>
+
+                    <!-- Agrupador AYER -->
+                    <div class="ibx-date-group">Ayer — 10 de abril de 2025</div>
+
+                    <!-- ── Oficio 4 (leído) ── -->
+                    <div class="nk-ibx-item" onclick="openView(this)">
+                        <div class="nk-ibx-item-elem nk-ibx-item-check"><input type="checkbox" onclick="event.stopPropagation();updateSel()"></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-star"><a href="#" class="star-link on" onclick="toggleStar(event,this)"><i class="bi bi-star-fill"></i></a></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-folio">
+                            <div class="folio-num">OFICIO-CI-2025-0112</div>
+                            <div class="folio-tipo">Auditoría · Ordinario</div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-user">
+                            <div class="user-card-ibx">
+                                <div class="user-av av-verde">CI</div>
+                                <div class="user-name-ibx">Contraloría Interna</div>
+                            </div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-fluid">
+                            <div class="nk-ibx-context-group">
+                                <div class="nk-ibx-context-badges"><span class="badge-ibx bi-firmado"><i class="bi bi-patch-check-fill"></i> Firmado</span></div>
+                                <div class="nk-ibx-context"><span class="nk-ibx-context-text"><span class="heading">Auditoría ejercicio 2024</span>Se informa sobre el inicio del proceso de auditoría al ejercicio fiscal…</span></div>
+                            </div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-attach"></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-time"><div class="time-text">11:10</div></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-tools"><div class="ibx-actions"><ul class="ibx-actions-hidden"><li><a href="#" class="btn-trigger" onclick="event.stopPropagation()"><i class="bi bi-archive"></i></a></li><li><a href="#" class="btn-trigger" onclick="event.stopPropagation()"><i class="bi bi-trash"></i></a></li></ul><ul class="ibx-actions-visible"><li><div class="dropdown"><a href="#" class="btn-trigger dropdown-toggle" data-bs-toggle="dropdown" onclick="event.stopPropagation()"><i class="bi bi-three-dots"></i></a><ul class="dropdown-menu dropdown-menu-end" style="border-radius:0;border-color:var(--pj-borde);font-size:0.78rem;"><li><a class="dropdown-item" href="#">Ver</a></li><li><a class="dropdown-item" href="#">Archivar</a></li><li><a class="dropdown-item" href="#">Eliminar</a></li></ul></div></li></ul></div></div>
+                    </div>
+
+                    <!-- ── Oficio 5 ── -->
+                    <div class="nk-ibx-item is-unread" onclick="openView(this)">
+                        <div class="nk-ibx-item-elem nk-ibx-item-check"><input type="checkbox" onclick="event.stopPropagation();updateSel()"></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-star"><a href="#" class="star-link" onclick="toggleStar(event,this)"><i class="bi bi-star"></i></a></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-folio">
+                            <div class="folio-num">OFICIO-JC1-2025-0587</div>
+                            <div class="folio-tipo">Remisión · Urgente</div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-user">
+                            <div class="user-card-ibx">
+                                <div class="user-av av-rojo">JC</div>
+                                <div class="user-name-ibx">Juzgado Civil 1°</div>
+                            </div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-fluid">
+                            <div class="nk-ibx-context-group">
+                                <div class="nk-ibx-context-badges"><span class="badge-ibx bi-urgente"><i class="bi bi-exclamation-triangle-fill"></i> Urgente</span></div>
+                                <div class="nk-ibx-context"><span class="nk-ibx-context-text"><span class="heading">Remisión expediente 445/2024</span>Se remite en original el expediente número 445/2024 para su…</span></div>
+                            </div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-attach"><a href="#" onclick="event.stopPropagation()"><i class="bi bi-paperclip"></i></a></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-time"><div class="time-text">09:42</div></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-tools"><div class="ibx-actions"><ul class="ibx-actions-hidden"><li><a href="#" class="btn-trigger" onclick="event.stopPropagation()"><i class="bi bi-archive"></i></a></li><li><a href="#" class="btn-trigger" onclick="event.stopPropagation()"><i class="bi bi-trash"></i></a></li></ul><ul class="ibx-actions-visible"><li><div class="dropdown"><a href="#" class="btn-trigger dropdown-toggle" data-bs-toggle="dropdown" onclick="event.stopPropagation()"><i class="bi bi-three-dots"></i></a><ul class="dropdown-menu dropdown-menu-end" style="border-radius:0;border-color:var(--pj-borde);font-size:0.78rem;"><li><a class="dropdown-item" href="#">Ver</a></li><li><a class="dropdown-item" href="#">Archivar</a></li><li><a class="dropdown-item" href="#">Eliminar</a></li></ul></div></li></ul></div></div>
+                    </div>
+
+                    <!-- ── Oficio 6 ── -->
+                    <div class="nk-ibx-item" onclick="openView(this)">
+                        <div class="nk-ibx-item-elem nk-ibx-item-check"><input type="checkbox" onclick="event.stopPropagation();updateSel()"></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-star"><a href="#" class="star-link" onclick="toggleStar(event,this)"><i class="bi bi-star"></i></a></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-folio">
+                            <div class="folio-num">OFICIO-IF-2025-0089</div>
+                            <div class="folio-tipo">Capacitación · Circular</div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-user">
+                            <div class="user-card-ibx">
+                                <div class="user-av av-gris">IF</div>
+                                <div class="user-name-ibx">Instituto Formación</div>
+                            </div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-fluid">
+                            <div class="nk-ibx-context-group">
+                                <div class="nk-ibx-context-badges"><span class="badge-ibx bi-firmado"><i class="bi bi-patch-check-fill"></i> Firmado</span></div>
+                                <div class="nk-ibx-context"><span class="nk-ibx-context-text"><span class="heading">Programa capacitación Q2 2025</span>Se hace del conocimiento el programa de capacitación para el segundo…</span></div>
+                            </div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-attach"></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-time"><div class="time-text">08:15</div></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-tools"><div class="ibx-actions"><ul class="ibx-actions-hidden"><li><a href="#" class="btn-trigger" onclick="event.stopPropagation()"><i class="bi bi-archive"></i></a></li><li><a href="#" class="btn-trigger" onclick="event.stopPropagation()"><i class="bi bi-trash"></i></a></li></ul><ul class="ibx-actions-visible"><li><div class="dropdown"><a href="#" class="btn-trigger dropdown-toggle" data-bs-toggle="dropdown" onclick="event.stopPropagation()"><i class="bi bi-three-dots"></i></a><ul class="dropdown-menu dropdown-menu-end" style="border-radius:0;border-color:var(--pj-borde);font-size:0.78rem;"><li><a class="dropdown-item" href="#">Ver</a></li><li><a class="dropdown-item" href="#">Archivar</a></li><li><a class="dropdown-item" href="#">Eliminar</a></li></ul></div></li></ul></div></div>
+                    </div>
+
+                    <!-- Agrupador semana pasada -->
+                    <div class="ibx-date-group">Esta semana</div>
+
+                    <!-- ── Oficio 7 ── -->
+                    <div class="nk-ibx-item" onclick="openView(this)">
+                        <div class="nk-ibx-item-elem nk-ibx-item-check"><input type="checkbox" onclick="event.stopPropagation();updateSel()"></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-star"><a href="#" class="star-link" onclick="toggleStar(event,this)"><i class="bi bi-star"></i></a></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-folio">
+                            <div class="folio-num">OFICIO-DEF-2025-0204</div>
+                            <div class="folio-tipo">Solicitud · Ordinario</div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-user">
+                            <div class="user-card-ibx">
+                                <div class="user-av av-verde">DP</div>
+                                <div class="user-name-ibx">Defensoría Pública</div>
+                            </div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-fluid">
+                            <div class="nk-ibx-context-group">
+                                <div class="nk-ibx-context-badges"><span class="badge-ibx bi-pendiente">Pendiente</span></div>
+                                <div class="nk-ibx-context"><span class="nk-ibx-context-text"><span class="heading">Solicitud asignación defensor</span>En cumplimiento a lo establecido en el artículo 17 de la Ley…</span></div>
+                            </div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-attach"><a href="#" onclick="event.stopPropagation()"><i class="bi bi-paperclip"></i></a></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-time"><div class="time-text">Lun</div></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-tools"><div class="ibx-actions"><ul class="ibx-actions-hidden"><li><a href="#" class="btn-trigger" onclick="event.stopPropagation()"><i class="bi bi-archive"></i></a></li><li><a href="#" class="btn-trigger" onclick="event.stopPropagation()"><i class="bi bi-trash"></i></a></li></ul><ul class="ibx-actions-visible"><li><div class="dropdown"><a href="#" class="btn-trigger dropdown-toggle" data-bs-toggle="dropdown" onclick="event.stopPropagation()"><i class="bi bi-three-dots"></i></a><ul class="dropdown-menu dropdown-menu-end" style="border-radius:0;border-color:var(--pj-borde);font-size:0.78rem;"><li><a class="dropdown-item" href="#">Ver</a></li><li><a class="dropdown-item" href="#">Archivar</a></li><li><a class="dropdown-item" href="#">Eliminar</a></li></ul></div></li></ul></div></div>
+                    </div>
+
+                    <!-- ── Oficio 8 ── -->
+                    <div class="nk-ibx-item" onclick="openView(this)">
+                        <div class="nk-ibx-item-elem nk-ibx-item-check"><input type="checkbox" onclick="event.stopPropagation();updateSel()"></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-star"><a href="#" class="star-link" onclick="toggleStar(event,this)"><i class="bi bi-star"></i></a></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-folio">
+                            <div class="folio-num">OFICIO-JL-2025-0330</div>
+                            <div class="folio-tipo">Resolución · Ordinario</div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-user">
+                            <div class="user-card-ibx">
+                                <div class="user-av av-dorado">JL</div>
+                                <div class="user-name-ibx">Juzgado Laboral</div>
+                            </div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-fluid">
+                            <div class="nk-ibx-context-group">
+                                <div class="nk-ibx-context-badges"><span class="badge-ibx bi-firmado"><i class="bi bi-patch-check-fill"></i> Firmado</span></div>
+                                <div class="nk-ibx-context"><span class="nk-ibx-context-text"><span class="heading">Resolución laudo 012/2025</span>Se adjunta copia certificada de la resolución emitida en el laudo…</span></div>
+                            </div>
+                        </div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-attach"><a href="#" onclick="event.stopPropagation()"><i class="bi bi-paperclip"></i></a></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-time"><div class="time-text">Vie</div></div>
+                        <div class="nk-ibx-item-elem nk-ibx-item-tools"><div class="ibx-actions"><ul class="ibx-actions-hidden"><li><a href="#" class="btn-trigger" onclick="event.stopPropagation()"><i class="bi bi-archive"></i></a></li><li><a href="#" class="btn-trigger" onclick="event.stopPropagation()"><i class="bi bi-trash"></i></a></li></ul><ul class="ibx-actions-visible"><li><div class="dropdown"><a href="#" class="btn-trigger dropdown-toggle" data-bs-toggle="dropdown" onclick="event.stopPropagation()"><i class="bi bi-three-dots"></i></a><ul class="dropdown-menu dropdown-menu-end" style="border-radius:0;border-color:var(--pj-borde);font-size:0.78rem;"><li><a class="dropdown-item" href="#">Ver</a></li><li><a class="dropdown-item" href="#">Archivar</a></li><li><a class="dropdown-item" href="#">Eliminar</a></li></ul></div></li></ul></div></div>
+                    </div>
+
+                </div>
+                <!-- /nk-ibx-list -->
+
+                <!-- ══════════════════════════════════
+                     NK-IBX-VIEW (panel detalle overlay)
+                ══════════════════════════════════ -->
+                <div class="nk-ibx-view" id="ibxView">
+
+                    <!-- Toolbar detalle -->
+                    <div class="nk-ibx-head">
+                        <div class="nk-ibx-head-actions">
+                            <ul class="nk-ibx-head-tools">
+                                <li style="margin-left:-4px;">
+                                    <a href="#" class="btn-trigger" onclick="closeView(event)" title="Volver">
+                                        <i class="bi bi-arrow-left"></i>
+                                    </a>
+                                </li>
+                                <li><a href="#" class="btn-trigger" title="Archivar"><i class="bi bi-archive"></i></a></li>
+                                <li class="d-none d-sm-block"><a href="#" class="btn-trigger" title="Marcar spam"><i class="bi bi-shield-exclamation"></i></a></li>
+                                <li><a href="#" class="btn-trigger" title="Eliminar"><i class="bi bi-trash"></i></a></li>
+                                <li><a href="#" class="btn-trigger" title="Etiquetar"><i class="bi bi-tag"></i></a></li>
+                                <li>
+                                    <div class="dropdown">
+                                        <a href="#" class="btn-trigger dropdown-toggle" data-bs-toggle="dropdown">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" style="border-radius:0;border-color:var(--pj-borde);font-size:0.78rem;">
+                                            <li><a class="dropdown-item" href="#">Marcar como no leído</a></li>
+                                            <li><a class="dropdown-item" href="#">Marcar no importante</a></li>
+                                            <li><a class="dropdown-item" href="#">Archivar mensaje</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="nk-ibx-head-actions ms-auto">
+                            <ul class="nk-ibx-head-tools">
+                                <li><a href="#" class="btn-trigger text-btn" title="Responder"><i class="bi bi-reply-fill"></i><span class="d-none d-sm-inline">Responder</span></a></li>
+                                <li><a href="#" class="btn-trigger text-btn" title="Turnar"><i class="bi bi-forward"></i><span class="d-none d-sm-inline">Turnar</span></a></li>
+                                <li><a href="#" class="btn-trigger text-btn" title="Firmar"><i class="bi bi-vector-pen"></i><span class="d-none d-sm-inline">Firmar</span></a></li>
+                                <li class="d-none d-md-block"><a href="#" class="btn-trigger" title="Imprimir"><i class="bi bi-printer"></i></a></li>
+                                <li class="d-none d-md-block"><a href="#" class="btn-trigger" title="Descargar"><i class="bi bi-download"></i></a></li>
+                                <li class="d-none d-sm-block"><a href="#" class="btn-trigger" title="Anterior"><i class="bi bi-chevron-up"></i></a></li>
+                                <li class="d-none d-sm-block"><a href="#" class="btn-trigger" title="Siguiente"><i class="bi bi-chevron-down"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Cuerpo del detalle -->
+                    <div class="nk-ibx-reply">
+
+                        <!-- Encabezado del oficio -->
+                        <div class="nk-ibx-reply-head">
+                            <div style="flex:1; min-width:0;">
+                                <div style="font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--pj-gris-lite); font-weight:700; margin-bottom:4px;">
+                                    OFICIO-TSJ-2025-0892 &nbsp;·&nbsp; Recibido: 03/04/2025 09:14 h
+                                </div>
+                                <h4 class="title">Convocatoria a Sesión Plenaria Ordinaria — Abril 2025</h4>
+                                <ul class="reply-tags">
+                                    <li><span class="reply-tag rt-urgente"><i class="bi bi-exclamation-triangle-fill"></i> Urgente</span></li>
+                                    <li><span class="reply-tag rt-pendiente"><i class="bi bi-clock"></i> Pendiente de atención</span></li>
+                                    <li><span class="reply-tag rt-info"><i class="bi bi-eye"></i> Leído: 03/04/2025 09:22 h</span></li>
+                                </ul>
+                            </div>
+                            <ul class="d-flex gap-1 list-unstyled mb-0 flex-shrink-0 ms-2">
+                                <li class="d-none d-sm-block">
+                                    <a href="#" class="btn-trigger" title="Imprimir"><i class="bi bi-printer"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn-trigger" title="Destacar"><i class="bi bi-star"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Hilos -->
+                        <div class="nk-ibx-reply-group">
+
+                            <!-- Hilo 1 — expandido -->
+                            <div class="nk-reply-item">
+                                <div class="nk-reply-header">
+                                    <div class="nk-reply-desc">
+                                        <div class="reply-avatar av-rojo">AP</div>
+                                        <div class="nk-reply-info">
+                                            <div class="reply-author">
+                                                Lic. Armando Pérez Saldaña
+                                                <span class="date d-sm-inline">03 Abr, 2025</span>
+                                            </div>
+                                            <div class="reply-to">Para: Mtra. Rosa López Ramírez · Sec. Gral. de Acuerdos</div>
+                                            <div class="reply-excerpt">Folio: OFICIO-TSJ-2025-0892 · FIEL: PESA-780312-MK8</div>
+                                        </div>
+                                    </div>
+                                    <ul class="nk-reply-tools">
+                                        <li class="d-none d-sm-block"><span class="date">09:14 h</span></li>
+                                        <li><a href="#" class="btn-trigger" title="Responder"><i class="bi bi-reply"></i></a></li>
+                                        <li>
+                                            <div class="dropdown">
+                                                <a href="#" class="btn-trigger dropdown-toggle" data-bs-toggle="dropdown">
+                                                    <i class="bi bi-three-dots-vertical"></i>
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-menu-end" style="border-radius:0;border-color:var(--pj-borde);font-size:0.78rem;">
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-reply-fill me-2"></i>Responder</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-forward me-2"></i>Turnar</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-trash me-2"></i>Eliminar</a></li>
+                                                    <li><a class="dropdown-item" href="#"><i class="bi bi-shield-exclamation me-2"></i>Reportar</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Firma verificada -->
+                                <div class="firma-verified">
+                                    <i class="bi bi-patch-check-fill"></i>
+                                    <div>
+                                        <div class="firma-label">Firma electrónica avanzada verificada</div>
+                                        <div class="firma-val">Lic. Armando Pérez Saldaña · FIEL: PESA-780312-MK8 · Vigente al 2026-12-31</div>
+                                    </div>
+                                </div>
+
+                                <div class="nk-reply-body">
+                                    <div class="nk-reply-entry">
+                                        <p>Estimada Maestra Rosa López Ramírez, Secretaria General de Acuerdos del Honorable Tribunal Superior de Justicia del Estado de Quintana Roo, <strong>PRESENTE.</strong></p>
+                                        <p>Por medio del presente y en cumplimiento a lo establecido en los artículos 34 y 35 de la Ley Orgánica del Poder Judicial del Estado de Quintana Roo, me permito convocar a usted a la <strong>Sesión Plenaria Ordinaria</strong> que tendrá verificativo el próximo <strong>martes 08 de abril del año en curso, a las 10:00 horas</strong>, en la Sala de Pleno de este Honorable Tribunal Superior de Justicia.</p>
+                                        <p>En dicha sesión se desahogarán los puntos del orden del día que se adjuntan al presente oficio, por lo que se solicita su puntual asistencia y la elaboración del acta correspondiente conforme a los procedimientos establecidos.</p>
+                                        <p>Sin otro particular, le reitero las seguridades de mi atenta y distinguida consideración.</p>
+                                        <p><strong>ATENTAMENTE<br>"JUSTICIA Y LEY"</strong><br>
+                                        Lic. Armando Pérez Saldaña<br>
+                                        Presidente del Tribunal Superior de Justicia<br>
+                                        del Estado de Quintana Roo</p>
+                                    </div>
+                                </div>
+
+                                <!-- Adjuntos -->
+                                <div class="attach-section">
+                                    <div class="attach-title"><i class="bi bi-paperclip me-1"></i>Documentos adjuntos (2)</div>
+                                    <div class="attach-items">
+                                        <a class="attach-chip" href="#">
+                                            <i class="bi bi-file-earmark-pdf-fill"></i>
+                                            <span>Orden_del_dia_Abril2025.pdf</span>
+                                            <span class="attach-size">284 KB</span>
+                                            <i class="bi bi-download" style="color:var(--pj-verde-mid);"></i>
+                                        </a>
+                                        <a class="attach-chip" href="#">
+                                            <i class="bi bi-file-earmark-pdf-fill"></i>
+                                            <span>Acuerdo_Presidencia_0892.pdf</span>
+                                            <span class="attach-size">118 KB</span>
+                                            <i class="bi bi-download" style="color:var(--pj-verde-mid);"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hilo 2 — colapsado -->
+                            <div class="nk-reply-item">
+                                <div class="nk-reply-header is-collapsed">
+                                    <div class="nk-reply-desc">
+                                        <div class="reply-avatar av-verde">MRL</div>
+                                        <div class="nk-reply-info">
+                                            <div class="reply-author">
+                                                Mtra. Rosa López Ramírez
+                                                <span class="date d-sm-inline">03 Abr, 2025</span>
+                                            </div>
+                                            <div class="reply-to">Para: Presidencia TSJ</div>
+                                            <div class="reply-excerpt">Acuse de recibo: oficio recibido a las 09:22 h</div>
+                                        </div>
+                                    </div>
+                                    <ul class="nk-reply-tools">
+                                        <li class="d-none d-sm-block"><span class="date">09:22 h</span></li>
+                                        <li><a href="#" class="btn-trigger" title="Responder"><i class="bi bi-reply"></i></a></li>
+                                        <li>
+                                            <div class="dropdown">
+                                                <a href="#" class="btn-trigger dropdown-toggle" data-bs-toggle="dropdown">
+                                                    <i class="bi bi-three-dots-vertical"></i>
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-menu-end" style="border-radius:0;border-color:var(--pj-borde);font-size:0.78rem;">
+                                                    <li><a class="dropdown-item" href="#">Responder</a></li>
+                                                    <li><a class="dropdown-item" href="#">Turnar</a></li>
+                                                    <li><a class="dropdown-item" href="#">Eliminar</a></li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /reply-group -->
+
+                        <!-- Formulario de respuesta -->
+                        <div class="nk-reply-form">
+                            <div class="nk-reply-form-header">
+                                <div class="reply-form-row">
+                                    <span class="reply-form-label">Para</span>
+                                    <input class="reply-form-input" type="text" value="armando.perez@tsj.qroo.gob.mx" placeholder="Destinatario">
+                                    <div class="reply-form-nav">
+                                        <a href="#">CC</a>
+                                        <a href="#">CCO</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="reply-form-editor">
+                                <textarea placeholder="Escriba su respuesta…"></textarea>
+                            </div>
+                            <div class="reply-form-tools">
+                                <ul class="reply-actions">
+                                    <li class="me-1">
+                                        <button class="btn-pj-send" type="button">
+                                            <i class="bi bi-send-fill"></i> Enviar
+                                        </button>
+                                    </li>
+                                    <li><a href="#" class="btn-trigger" title="Plantillas"><i class="bi bi-hash"></i></a></li>
+                                    <li><a href="#" class="btn-trigger" title="Adjuntar"><i class="bi bi-paperclip"></i></a></li>
+                                    <li><a href="#" class="btn-trigger" title="Imagen"><i class="bi bi-image"></i></a></li>
+                                    <li><a href="#" class="btn-trigger" title="Firma digital"><i class="bi bi-vector-pen"></i></a></li>
+                                </ul>
+                                <ul class="reply-actions">
+                                    <li><a href="#" class="btn-trigger"><i class="bi bi-three-dots-vertical"></i></a></li>
+                                    <li><a href="#" class="btn-trigger"><i class="bi bi-trash"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /nk-ibx-reply -->
+
+                </div>
+                <!-- /nk-ibx-view -->
+
+            </div>
+            <!-- /nk-ibx-body -->
+
+        </div>
+        <!-- /nk-ibx -->
+
+    </div>
+    <!-- /nk-content -->
+
+    <!-- ═══ NK-FOOTER ═══ -->
+    <div class="nk-footer">
+        <div class="nk-footer-wrap">
+            <div class="nk-footer-copy">
+                &copy; 2025 Poder Judicial del Estado de Quintana Roo &nbsp;·&nbsp; SOQROO v3.1
+            </div>
+            <div class="nk-footer-links">
+                <a href="#">Aviso de Privacidad</a>
+                <a href="#">Términos de Uso</a>
+                <a href="#">Transparencia</a>
+            </div>
+        </div>
+    </div>
+
+</div><!-- /nk-wrap -->
+</div><!-- /nk-app-root -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    /* ── Abrir panel de detalle ── */
+    function openView(el) {
+        document.querySelectorAll('.nk-ibx-item').forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
+        el.classList.remove('is-unread');
+        document.getElementById('ibxView').classList.add('is-open');
+    }
+
+    /* ── Cerrar panel de detalle ── */
+    function closeView(e) {
+        e.preventDefault();
+        document.getElementById('ibxView').classList.remove('is-open');
+        document.querySelectorAll('.nk-ibx-item').forEach(i => i.classList.remove('active'));
+    }
+
+    /* ── Toggle estrella ── */
+    function toggleStar(e, el) {
+        e.stopPropagation();
+        e.preventDefault();
+        const icon = el.querySelector('i');
+        if (icon.classList.contains('bi-star')) {
+            icon.classList.replace('bi-star', 'bi-star-fill');
+            el.classList.add('on');
+        } else {
+            icon.classList.replace('bi-star-fill', 'bi-star');
+            el.classList.remove('on');
+        }
+    }
+
+    /* ── Tabs ── */
+    function setTab(el) {
+        document.querySelectorAll('.ibx-nav-tab').forEach(t => t.classList.remove('active'));
+        el.classList.add('active');
+        document.getElementById('ibxView').classList.remove('is-open');
+    }
+
+    /* ── Seleccionar todos ── */
+    function toggleAll(master) {
+        document.querySelectorAll('.nk-ibx-item input[type="checkbox"]')
+            .forEach(cb => cb.checked = master.checked);
+        updateSel();
+    }
+
+    /* ── Contador de selección ── */
+    function updateSel() {
+        const count = document.querySelectorAll('.nk-ibx-item input[type="checkbox"]:checked').length;
+        const info  = document.getElementById('selInfo');
+        info.innerHTML = count > 0
+            ? `<strong>${count}</strong> seleccionado${count > 1 ? 's' : ''}`
+            : '';
+    }
+</script>
+</body>
+</html>

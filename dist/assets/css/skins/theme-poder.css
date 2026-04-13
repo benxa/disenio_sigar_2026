@@ -523,3 +523,82 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
 .custom-control.color-control .custom-control-label:before {
   border-color: #2d5c3a !important;
 }
+
+.btn-pj {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  cursor: pointer;
+  font-family: "DM Sans", sans-serif;
+  font-size: 0.77rem;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 0;
+  transition: background 0.15s;
+  text-decoration: none;
+}
+.btn-pj-primary {
+  background: #2d5c3a;
+  color: #fff;
+  border-bottom: 2px solid #c9a440;
+}
+.btn-pj-primary:hover {
+  background: #3d7a50;
+  color: #ffffff;
+}
+.btn-pj-outline {
+  background: #fffcf6;
+  color: #5c5448;
+  border: 1px solid #ddd5c0;
+}
+.btn-pj-outline:hover {
+  background: #f4f0e8;
+  color: #2d5c3a;
+}
+.btn-pj-danger {
+  background: transparent;
+  color: #8b2531;
+  border: 1px solid rgba(139, 37, 49, 0.3);
+}
+.btn-pj-danger:hover {
+  background: #fdf0f1;
+}
+
+.av-verde {
+  background: #2d5c3a;
+}
+.av-rojo {
+  background: #8b2531;
+}
+.av-dorado {
+  background: #c9a440;
+  color: #2c2820;
+}
+.av-gris {
+  background: #5c5448;
+}
+.av-900 {
+  background: #1a3a24;
+}
+
+.nk-footer {
+  background: #2d5c3a;
+  padding: 10px 20px;
+  flex-shrink: 0;
+}
+.nk-footer-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.nk-footer-copyright {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+.nk-footer-copyright a {
+  color: #c9a440;
+  text-decoration: none;
+}
