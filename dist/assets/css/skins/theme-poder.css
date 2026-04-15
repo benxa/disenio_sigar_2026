@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
  * Theme: Poder Judicial
  * Package: DashLite v3.2.3
@@ -14,6 +15,9 @@
 }
 .nk-header.is-theme:not([class*=bg-]) {
   background: #2a5536;
+}
+.nk-header.is-crema:not([class*=bg-]) {
+  background: #fffcf6;
 }
 
 .is-dark .nk-menu-link {
@@ -83,6 +87,10 @@
 .ui-shady .nk-msg-item.active:after, .ui-shady .nk-msg-item.current:after,
 .ui-softy .nk-msg-item.active:after, .ui-softy .nk-msg-item.current:after {
   background: #2d5c3a;
+}
+
+.card {
+  background: #fffcf6;
 }
 
 .card-bordered.is-dark {
@@ -196,7 +204,7 @@ a:hover {
 }
 
 .bg-lighter {
-  background-color: #f5f6fa !important;
+  background-color: #f4f0e8 !important;
 }
 
 .bg-primary {
@@ -522,6 +530,56 @@ a.bg-primary:hover, a.bg-primary:focus, button.bg-primary:hover, button.bg-prima
 .custom-control-pro.no-control .custom-control-input:not(:disabled):active ~ .custom-control-label,
 .custom-control.color-control .custom-control-label:before {
   border-color: #2d5c3a !important;
+}
+
+/* Franja tricolor */
+.franja-tricolor {
+  height: 4px;
+  background: linear-gradient(90deg, #2d5c3a 33.3%, #c9a440 33.3% 66.6%, #8b2531 66.6%);
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════
+    GOV TOPBAR
+══════════════════════════════════ */
+.gov-topbar {
+  background: #1a3a24;
+  border-bottom: 2px solid #c9a440;
+  padding: 4px 20px;
+  font-size: 0.67rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  z-index: 1060;
+}
+
+.gov-topbar .gov-name {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.gov-topbar .gov-links {
+  display: flex;
+}
+
+.gov-topbar .gov-links a {
+  color: #e2c06a;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.65rem;
+}
+
+.gov-topbar .gov-links a:first-child {
+  border-left: none;
+}
+
+.gov-topbar .gov-links a:hover {
+  text-decoration: underline;
 }
 
 .btn-pj {
